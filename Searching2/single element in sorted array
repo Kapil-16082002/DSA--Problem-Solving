@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n=nums.size();
+        int low=0;
+        int high=n-1;
+        while(low<high){
+            int m=(low+high)/2;
+            int a=nums[m];
+            if ((m%2==0 && nums[m+1]==a)|| (m%2!=0 && nums[m-1]==a))
+                low=m+1;
+            else
+                high=m;
+        }
+        return nums[low];
+        
+    }
+};

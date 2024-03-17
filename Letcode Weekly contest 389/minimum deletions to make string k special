@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int minimumDeletions(string word, int k) {
+      int n=word.size();
+      unordered_map<char,int>mpp;
+      for(int i=0;i<n;i++){
+        mpp[word[i]]++;
+      }
+      vector<int>nums;
+      for(auto it:mpp){
+        if(it.second>0) nums.push_back(it.second);
+      }
+      sort(nums.rbegin(),nums.rend());
+      int x=nums.size();
+      int mindeletions=INT_MAX;
+      for(int i=0;i<x;i++){
+         int deletions=0;
+        int val=nums[i];
+        for(auto it:nums){
+          if(it>val+k) deletions=deletions+it-(val+k);
+          else if(it<val)deletions=deletions+it;
+        }
+        mindeletions=min(mindeletions,deletions);
+        if(mindeletions==0) break;        
+      }
+      if(mindeletions!=INT_MAX) return mindeletions;
+      else return 0;
+      
+   
+      
+      
+        
+    }
+};
